@@ -49,15 +49,6 @@ const values = [
   },
 ];
 
-const milestones = [
-  { year: "2009", event: "Predators MMA founded in a small unit in East Manchester" },
-  { year: "2012", event: "Moved to current 8,000 sq ft facility with full mat space" },
-  { year: "2015", event: "First national champion produced from our ranks" },
-  { year: "2018", event: "Women's programme launched — fastest growing class in the gym" },
-  { year: "2021", event: "Kids & teens programme expanded to 4 sessions per week" },
-  { year: "2024", event: "500+ active members and counting" },
-];
-
 export default function AboutPage() {
   return (
     <>
@@ -106,7 +97,7 @@ export default function AboutPage() {
               Where it all began
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 leading-relaxed mb-5">
-              In 2009, head coach {headTrainer.name}{" "}converted a warehouse space into what would become one of Manchester&apos;s most respected martial arts gyms. Starting with just a handful of fighters and a single set of mats, Predators MMA was built on sweat, sacrifice, and an unwavering standard of coaching.
+              In 2009, head coach {headTrainer.name}{" "}converted a warehouse space into what would become one of Southampton&apos;s most respected martial arts gyms. Starting with just a handful of fighters and a single set of mats, Predators MMA was built on sweat, sacrifice, and an unwavering standard of coaching.
             </motion.p>
             <motion.p variants={fadeUp} className="text-gray-400 leading-relaxed mb-5">
               Over the years we have expanded our programmes to cover MMA, Muay Thai, Boxing, BJJ, Wrestling, and more — welcoming everyone from absolute beginners to professional competitors.
@@ -195,34 +186,6 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-white font-black text-xl uppercase tracking-wide mb-3">{title}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </Animate>
-        </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="py-24 bg-[#0d0d0d]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Animate className="text-center mb-14">
-            <motion.span variants={fadeUp} className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-2 mb-4">
-              <span className="w-8 h-px bg-[#c9a84c]" /> Our Journey <span className="w-8 h-px bg-[#c9a84c]" />
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-black text-white">
-              Milestones
-            </motion.h2>
-          </Animate>
-
-          <Animate>
-            <div className="relative border-l-2 border-[#cc0000]/20 pl-8 space-y-10">
-              {milestones.map((m) => (
-                <motion.div key={m.year} variants={fadeUp} className="relative">
-                  <div className="absolute -left-[2.7rem] w-5 h-5 border-2 border-[#cc0000] bg-[#0d0d0d] flex items-center justify-center">
-                    <div className="w-2 h-2 bg-[#cc0000]" />
-                  </div>
-                  <div className="text-[#c9a84c] text-xs font-bold uppercase tracking-widest mb-1">{m.year}</div>
-                  <p className="text-gray-300 font-medium">{m.event}</p>
                 </motion.div>
               ))}
             </div>

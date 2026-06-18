@@ -39,8 +39,8 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Address",
-    value: "123 Fighter Lane, Manchester, M1 2AB",
-    link: "https://maps.google.com",
+    value: "119 St Marys Road, Southampton, SO14 0BL, United Kingdom",
+    link: "https://www.google.com/maps/search/?api=1&query=119+St+Marys+Road,+Southampton,+SO14+0BL,+United+Kingdom",
   },
   {
     icon: Phone,
@@ -251,9 +251,9 @@ export default function ContactPage() {
             <motion.div variants={fadeUp} className="bg-[#111] border border-white/5 aspect-[16/9] flex items-center justify-center relative overflow-hidden">
               <div className="text-center z-10">
                 <MapPin size={32} className="text-[#cc0000] mx-auto mb-2" />
-                <p className="text-gray-400 text-sm font-medium">123 Fighter Lane, Manchester</p>
+                <p className="text-gray-400 text-sm font-medium">119 St Marys Road, Southampton, SO14 0BL</p>
                 <a
-                  href="https://maps.google.com"
+                  href="https://www.google.com/maps/search/?api=1&query=119+St+Marys+Road,+Southampton,+SO14+0BL,+United+Kingdom"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#c9a84c] text-xs mt-2 inline-block hover:text-white transition-colors"

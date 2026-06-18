@@ -90,7 +90,7 @@ export default function HomePage() {
             transition={{ duration: 0.7 }}
           >
             <span className="inline-block text-[#c9a84c] text-xs font-bold uppercase tracking-[0.3em] mb-6 border border-[#c9a84c]/30 px-4 py-1.5">
-              Manchester&apos;s Premier MMA Gym
+              Southampton&apos;s Premier MMA Gym
             </span>
           </motion.div>
 
@@ -351,7 +351,7 @@ export default function HomePage() {
               Book Your Free<br />Trial Session Today
             </motion.h2>
             <motion.p variants={fadeUp} className="text-red-100 text-lg mb-10 max-w-xl mx-auto">
-              Come in, train with us, and see why Predators MMA is Manchester&apos;s most respected combat sports gym.
+              Come in, train with us, and see why Predators MMA is Southampton&apos;s most respected combat sports gym.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

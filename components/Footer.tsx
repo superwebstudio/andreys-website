@@ -111,7 +111,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin size={15} className="text-[#c9a84c] mt-0.5 shrink-0" />
-                <span>123 Fighter Lane, Manchester, M1 2AB</span>
+                <span>119 St Marys Road, Southampton, SO14 0BL, United Kingdom</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone size={15} className="text-[#c9a84c] shrink-0" />

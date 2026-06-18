@@ -32,7 +32,6 @@ function IconYoutube({ className }: { className?: string }) {
 const navLinks = [
   { href: "/about", label: "About" },
   { href: "/timetable", label: "Timetable" },
-  { href: "/coaches", label: "Coaches" },
   { href: "/membership", label: "Membership" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },

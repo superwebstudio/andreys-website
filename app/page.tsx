@@ -12,7 +12,7 @@ import {
   Trophy,
   ArrowRight,
 } from "lucide-react";
-import { membershipPlans, schedule, headTrainer } from "@/lib/gym-data";
+import { membershipPlans, schedule } from "@/lib/gym-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -52,30 +52,6 @@ const trainingTimes = schedule
     day: day.day,
     classes: day.classes.map((cls) => `${cls.time} – ${cls.name}`),
   }));
-
-const coaches = [
-  {
-    name: headTrainer.name,
-    role: `${headTrainer.role} · Muay Thai & MMA`,
-    bio: "Multiple-time world champion with 28+ MMA wins and 63 Muay Thai & K-1 victories. Elite-level striking, technique, and fight strategy.",
-    image: "/images/coach1.jpg",
-    initials: headTrainer.initials,
-  },
-  {
-    name: "Sofia Reyes",
-    role: "BJJ Coach · Black Belt",
-    bio: "BJJ black belt under the Gracie lineage. National champion 2019–2022. Passionate about technique over power.",
-    image: "/images/coach2.jpg",
-    initials: "SR",
-  },
-  {
-    name: "Danny Okafor",
-    role: "Boxing & S&C Coach",
-    bio: "Amateur boxing champion turned performance coach. Brings explosive conditioning and sharp technical striking.",
-    image: "/images/coach3.jpg",
-    initials: "DO",
-  },
-];
 
 const stats = [
   { value: "500+", label: "Active Members" },
@@ -352,51 +328,6 @@ export default function HomePage() {
                   </Link>
                 </motion.div>
               ))}
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      {/* ── COACHES PREVIEW ─────────────────────────────── */}
-      <section className="py-24 bg-[#0d0d0d]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Section className="text-center mb-14">
-            <motion.span variants={fadeUp} className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-2 mb-4">
-              <span className="w-8 h-px bg-[#c9a84c]" /> Our Team <span className="w-8 h-px bg-[#c9a84c]" />
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-black text-white">
-              World-Class Coaches
-            </motion.h2>
-          </Section>
-
-          <Section>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {coaches.map((coach) => (
-                <motion.div
-                  key={coach.name}
-                  variants={fadeUp}
-                  className="group bg-[#111] border border-white/5 hover:border-[#cc0000]/30 overflow-hidden transition-colors"
-                >
-                  <div className="aspect-[4/3] bg-[#1a1a1a] relative overflow-hidden flex items-center justify-center">
-                    <span className="text-5xl font-black text-[#cc0000]/20">{coach.initials}</span>
-                    <p className="absolute bottom-2 left-2 text-gray-600 text-[10px]">Add coach photo</p>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent opacity-60" />
-                  </div>
-                  <div className="p-6">
-                    <div className="text-[#c9a84c] text-xs font-bold uppercase tracking-widest mb-1">{coach.role}</div>
-                    <h3 className="text-white font-bold text-lg mb-2">{coach.name}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{coach.bio}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <Link
-                href="/coaches"
-                className="inline-flex items-center gap-2 text-[#c9a84c] hover:text-white text-sm font-bold uppercase tracking-widest transition-colors"
-              >
-                Meet All Coaches <ArrowRight size={14} />
-              </Link>
             </div>
           </Section>
         </div>

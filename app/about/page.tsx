@@ -3,7 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { Shield, Flame, Users, Target, ChevronRight } from "lucide-react";
+import { Shield, Flame, Users, Target, ChevronRight, Trophy } from "lucide-react";
+import { headTrainer } from "@/lib/gym-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -105,7 +106,7 @@ export default function AboutPage() {
               Where it all began
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 leading-relaxed mb-5">
-              In 2009, head coach Marcus Hill converted a warehouse space into what would become one of Manchester&apos;s most respected martial arts gyms. Starting with just a handful of fighters and a single set of mats, Predators MMA was built on sweat, sacrifice, and an unwavering standard of coaching.
+              In 2009, head coach {headTrainer.name}{" "}converted a warehouse space into what would become one of Manchester&apos;s most respected martial arts gyms. Starting with just a handful of fighters and a single set of mats, Predators MMA was built on sweat, sacrifice, and an unwavering standard of coaching.
             </motion.p>
             <motion.p variants={fadeUp} className="text-gray-400 leading-relaxed mb-5">
               Over the years we have expanded our programmes to cover MMA, Muay Thai, Boxing, BJJ, Wrestling, and more — welcoming everyone from absolute beginners to professional competitors.
@@ -122,8 +123,55 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
+      {/* About the Trainer */}
       <section className="py-24 bg-[#0a0a0a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
+          <Animate>
+            <motion.div variants={fadeUp} className="relative aspect-[4/5] bg-[#1a1a1a] overflow-hidden flex items-center justify-center">
+              <span className="text-8xl font-black text-[#cc0000]/15 select-none">{headTrainer.initials}</span>
+              <div className="absolute inset-0 border border-[#cc0000]/10" />
+              <p className="absolute bottom-4 left-4 text-gray-600 text-xs">Add coach photo</p>
+            </motion.div>
+          </Animate>
+
+          <Animate>
+            <motion.span variants={fadeUp} className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-2 mb-4">
+              <span className="w-8 h-px bg-[#c9a84c]" /> About the Trainer
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="text-4xl font-black text-white mb-2">
+              {headTrainer.name}
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-[#c9a84c] text-sm font-bold uppercase tracking-widest mb-6">
+              {headTrainer.role} · {headTrainer.discipline}
+            </motion.p>
+            {headTrainer.bio.map((paragraph) => (
+              <motion.p key={paragraph.slice(0, 40)} variants={fadeUp} className="text-gray-400 leading-relaxed mb-5">
+                {paragraph}
+              </motion.p>
+            ))}
+            <motion.blockquote variants={fadeUp} className="border-l-2 border-[#cc0000] pl-5 mb-8">
+              <p className="text-gray-300 italic leading-relaxed">&ldquo;{headTrainer.testimonial}&rdquo;</p>
+            </motion.blockquote>
+            <motion.div variants={fadeUp}>
+              <div className="flex items-center gap-2 mb-4">
+                <Trophy size={14} className="text-[#c9a84c]" />
+                <span className="text-[#c9a84c] text-xs font-bold uppercase tracking-widest">Achievements</span>
+              </div>
+              <ul className="grid sm:grid-cols-2 gap-2">
+                {headTrainer.achievements.map((achievement) => (
+                  <li key={achievement} className="flex items-start gap-2 text-sm text-gray-500">
+                    <span className="w-1.5 h-1.5 bg-[#cc0000] rounded-full mt-2 shrink-0" />
+                    {achievement}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </Animate>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-24 bg-[#0d0d0d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Animate className="text-center mb-14">
             <motion.span variants={fadeUp} className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-2 mb-4">

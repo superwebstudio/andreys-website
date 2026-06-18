@@ -90,9 +90,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               {[
-                { day: "Mon – Fri", time: "6:00 AM – 9:00 PM" },
-                { day: "Saturday", time: "8:00 AM – 4:00 PM" },
-                { day: "Sunday", time: "10:00 AM – 2:00 PM" },
+                { day: "Mon, Wed, Fri", time: "5:30 PM – 9:00 PM" },
+                { day: "Tue & Thu", time: "6:00 PM – 8:00 PM" },
+                { day: "Saturday", time: "10:00 AM – 1:00 PM" },
+                { day: "Sunday", time: "Closed" },
               ].map((item) => (
                 <li key={item.day} className="flex justify-between gap-4 text-gray-400">
                   <span>{item.day}</span>

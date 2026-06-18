@@ -12,6 +12,7 @@ import {
   Trophy,
   ArrowRight,
 } from "lucide-react";
+import { membershipPlans, schedule, headTrainer } from "@/lib/gym-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -45,50 +46,20 @@ function Section({
   );
 }
 
-const trainingTimes = [
-  { day: "Monday", classes: ["6:00 AM – Boxing Fundamentals", "12:00 PM – BJJ Open Mat", "7:00 PM – MMA Sparring"] },
-  { day: "Tuesday", classes: ["6:00 AM – Muay Thai", "6:30 PM – Wrestling", "8:00 PM – Conditioning"] },
-  { day: "Wednesday", classes: ["6:00 AM – Boxing Fundamentals", "12:00 PM – BJJ Open Mat", "7:00 PM – MMA"] },
-  { day: "Thursday", classes: ["6:00 AM – Muay Thai", "6:30 PM – Wrestling", "8:00 PM – Kids MMA"] },
-  { day: "Friday", classes: ["6:00 AM – Boxing Fundamentals", "12:00 PM – BJJ", "7:00 PM – MMA Sparring"] },
-  { day: "Saturday", classes: ["9:00 AM – MMA All Levels", "11:00 AM – BJJ Open Mat"] },
-  { day: "Sunday", classes: ["10:00 AM – Open Gym"] },
-];
-
-const membershipPlans = [
-  {
-    name: "Beginner",
-    price: "£39",
-    period: "/month",
-    color: "border-white/10",
-    highlight: false,
-    features: ["3 Classes per week", "Access to gym floor", "Beginner coaching", "Online resources"],
-  },
-  {
-    name: "Regular",
-    price: "£65",
-    period: "/month",
-    color: "border-[#cc0000]",
-    highlight: true,
-    features: ["Unlimited classes", "All disciplines", "Priority booking", "1 PT session/month", "Gym floor access"],
-  },
-  {
-    name: "Unlimited",
-    price: "£95",
-    period: "/month",
-    color: "border-[#c9a84c]",
-    highlight: false,
-    features: ["Everything in Regular", "2 PT sessions/month", "Fighter programme", "Competition prep", "Nutrition guide"],
-  },
-];
+const trainingTimes = schedule
+  .filter((day) => day.classes.length > 0)
+  .map((day) => ({
+    day: day.day,
+    classes: day.classes.map((cls) => `${cls.time} – ${cls.name}`),
+  }));
 
 const coaches = [
   {
-    name: "Marcus 'The Predator' Hill",
-    role: "Head Coach · MMA",
-    bio: "Former professional MMA fighter with 12+ years coaching experience. Specialist in Muay Thai and wrestling.",
+    name: headTrainer.name,
+    role: `${headTrainer.role} · Muay Thai & MMA`,
+    bio: "Multiple-time world champion with 28+ MMA wins and 63 Muay Thai & K-1 victories. Elite-level striking, technique, and fight strategy.",
     image: "/images/coach1.jpg",
-    initials: "MH",
+    initials: headTrainer.initials,
   },
   {
     name: "Sofia Reyes",
@@ -285,7 +256,7 @@ export default function HomePage() {
               Weekly Timetable
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 mt-3 max-w-xl mx-auto">
-              Sessions running 7 days a week across all disciplines. Pick your slot and show up.
+              K-1, Muay Thai, boxing, grappling and kids classes throughout the week.
             </motion.p>
           </Section>
 
@@ -335,12 +306,12 @@ export default function HomePage() {
               Choose Your Path
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-500 mt-3 max-w-xl mx-auto">
-              No contracts. Cancel anytime. Just pure training.
+              £60/month unlimited, or £10 per session. Private coaching available too.
             </motion.p>
           </Section>
 
           <Section>
-            <div className="grid sm:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {membershipPlans.map((plan) => (
                 <motion.div
                   key={plan.name}

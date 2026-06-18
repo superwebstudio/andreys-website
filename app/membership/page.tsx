@@ -3,7 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
-import { Check, ChevronRight, HelpCircle } from "lucide-react";
+import { Check, ChevronRight, HelpCircle, Users } from "lucide-react";
+import { membershipPlans, privateSessions } from "@/lib/gym-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -22,96 +23,32 @@ function Animate({ children, className = "" }: { children: React.ReactNode; clas
   );
 }
 
-const plans = [
-  {
-    name: "Beginner",
-    tagline: "Start your journey",
-    price: "£39",
-    period: "/month",
-    color: "border-white/10",
-    accentColor: "text-white",
-    highlight: false,
-    cta: "Start for Free",
-    features: [
-      { text: "3 classes per week", included: true },
-      { text: "Access to gym floor", included: true },
-      { text: "Beginner coaching programme", included: true },
-      { text: "Online training resources", included: true },
-      { text: "Locker & changing facilities", included: true },
-      { text: "All disciplines", included: false },
-      { text: "PT sessions", included: false },
-      { text: "Competition / fighter programme", included: false },
-    ],
-  },
-  {
-    name: "Regular",
-    tagline: "Most popular — for committed members",
-    price: "£65",
-    period: "/month",
-    color: "border-[#cc0000]",
-    accentColor: "text-[#cc0000]",
-    highlight: true,
-    cta: "Join Regular",
-    features: [
-      { text: "Unlimited classes per week", included: true },
-      { text: "All disciplines included", included: true },
-      { text: "Priority class booking", included: true },
-      { text: "1 PT session per month", included: true },
-      { text: "Online training resources", included: true },
-      { text: "Locker & changing facilities", included: true },
-      { text: "Gym floor access", included: true },
-      { text: "Competition / fighter programme", included: false },
-    ],
-  },
-  {
-    name: "Unlimited",
-    tagline: "For serious athletes",
-    price: "£95",
-    period: "/month",
-    color: "border-[#c9a84c]",
-    accentColor: "text-[#c9a84c]",
-    highlight: false,
-    cta: "Go Unlimited",
-    features: [
-      { text: "Everything in Regular", included: true },
-      { text: "2 PT sessions per month", included: true },
-      { text: "Fighter programme access", included: true },
-      { text: "Competition prep coaching", included: true },
-      { text: "Personalised nutrition guide", included: true },
-      { text: "Video analysis sessions", included: true },
-      { text: "Sparring priority booking", included: true },
-      { text: "Guest gym access (partner gyms)", included: true },
-    ],
-  },
-];
-
 const faqs = [
   {
-    q: "Is there a joining fee?",
-    a: "There is a one-off £20 admin fee on your first month. After that you only pay the monthly membership.",
+    q: "Can I try before joining?",
+    a: "Yes. Drop in for a per-session class at £10, or contact us to arrange your first visit.",
   },
   {
-    q: "Can I try before joining?",
-    a: "Yes! We offer a free trial class to all new members. Just show up or contact us to book your slot.",
+    q: "What's included in the monthly membership?",
+    a: "£60/month gives you unlimited access to all group classes on the timetable — K-1, Muay Thai, boxing, grappling and more.",
+  },
+  {
+    q: "Do you offer private training?",
+    a: "Yes. Private sessions and small groups are available from £40 for a 45-minute 1-to-1, up to £60 for a 60-minute session with 4 people.",
   },
   {
     q: "Are there contracts?",
-    a: "No long-term contracts. All memberships are monthly rolling — cancel any time with 30 days notice.",
-  },
-  {
-    q: "Do you offer family / student discounts?",
-    a: "Yes. Students and under-18s receive 20% off any membership. Family bundles available — contact us for details.",
+    a: "No long-term contracts. Pay monthly or per session — whichever suits you.",
   },
   {
     q: "I've never trained before — is this right for me?",
-    a: "Absolutely. The Beginner plan is designed specifically for new starters. Every coach at Predators loves working with beginners.",
+    a: "Absolutely. Our drills and technique classes welcome all levels. Come in, train with us, and build from there.",
   },
 ];
 
 export default function MembershipPage() {
   return (
     <>
-      {/* Hero */}
       <section className="relative pt-32 pb-16 bg-[#0a0a0a] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(204,0,0,0.08),transparent)]" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -123,30 +60,35 @@ export default function MembershipPage() {
               Invest in Yourself
             </motion.h1>
             <motion.p variants={fadeUp} className="text-gray-400 text-lg max-w-xl">
-              Simple, transparent pricing. No hidden fees. No long-term contracts. Just great training.
+              Simple, transparent pricing. Monthly membership or pay per session — plus private coaching for individuals and small groups.
             </motion.p>
           </Animate>
         </div>
       </section>
 
-      {/* Pricing cards */}
       <section className="py-20 bg-[#0d0d0d]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Animate className="text-center mb-12">
+            <motion.h2 variants={fadeUp} className="text-3xl font-black text-white">
+              Group Classes
+            </motion.h2>
+          </Animate>
+
           <Animate>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-              {plans.map((plan) => (
+            <div className="grid sm:grid-cols-2 gap-6 items-start max-w-4xl mx-auto">
+              {membershipPlans.map((plan) => (
                 <motion.div
                   key={plan.name}
                   variants={fadeUp}
                   className={`relative border-2 ${plan.color} ${plan.highlight ? "bg-[#1a0000]" : "bg-[#111]"} flex flex-col`}
                 >
                   {plan.highlight && (
-                    <div className="absolute -top-px left-0 right-0 h-1 bg-[#cc0000]" />
-                  )}
-                  {plan.highlight && (
-                    <div className="bg-[#cc0000] text-white text-[10px] font-bold uppercase tracking-widest text-center py-2">
-                      Most Popular
-                    </div>
+                    <>
+                      <div className="absolute -top-px left-0 right-0 h-1 bg-[#cc0000]" />
+                      <div className="bg-[#cc0000] text-white text-[10px] font-bold uppercase tracking-widest text-center py-2">
+                        Best Value
+                      </div>
+                    </>
                   )}
 
                   <div className="p-8 border-b border-white/5">
@@ -160,13 +102,10 @@ export default function MembershipPage() {
 
                   <div className="p-8 flex-1 flex flex-col">
                     <ul className="space-y-3 mb-8 flex-1">
-                      {plan.features.map((f) => (
-                        <li key={f.text} className={`flex items-center gap-3 text-sm ${f.included ? "text-gray-300" : "text-gray-600 line-through"}`}>
-                          <Check
-                            size={14}
-                            className={f.included ? "text-[#cc0000] shrink-0" : "text-gray-700 shrink-0"}
-                          />
-                          {f.text}
+                      {plan.features.map((text) => (
+                        <li key={text} className="flex items-center gap-3 text-sm text-gray-300">
+                          <Check size={14} className="text-[#cc0000] shrink-0" />
+                          {text}
                         </li>
                       ))}
                     </ul>
@@ -175,8 +114,6 @@ export default function MembershipPage() {
                       className={`block text-center font-bold uppercase tracking-widest text-sm py-4 transition-colors ${
                         plan.highlight
                           ? "bg-[#cc0000] hover:bg-[#990000] text-white"
-                          : plan.name === "Unlimited"
-                          ? "bg-[#c9a84c] hover:bg-[#b8973e] text-black"
                           : "border border-white/20 hover:border-white text-gray-300 hover:text-white"
                       }`}
                     >
@@ -187,16 +124,59 @@ export default function MembershipPage() {
               ))}
             </div>
           </Animate>
+        </div>
+      </section>
 
-          <Animate className="mt-8 text-center">
-            <motion.p variants={fadeUp} className="text-gray-600 text-sm">
-              All memberships include a one-off £20 admin fee on first month. Student / family discounts available.
+      <section className="py-20 bg-[#0a0a0a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Animate className="text-center mb-12">
+            <motion.span variants={fadeUp} className="text-[#c9a84c] text-xs font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-2 mb-4">
+              <span className="w-8 h-px bg-[#c9a84c]" /> Private Coaching <span className="w-8 h-px bg-[#c9a84c]" />
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-black text-white mb-3">
+              Private Sessions &amp; Small Groups
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-gray-500 max-w-xl mx-auto">
+              One-to-one or small group coaching tailored to your goals. Contact us to book.
             </motion.p>
+          </Animate>
+
+          <Animate>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {privateSessions.map((session) => (
+                <motion.div
+                  key={`${session.people}-${session.duration}`}
+                  variants={fadeUp}
+                  className="bg-[#111] border border-[#c9a84c]/20 p-6 text-center hover:border-[#c9a84c]/40 transition-colors"
+                >
+                  <div className="w-10 h-10 border border-[#c9a84c]/30 flex items-center justify-center mx-auto mb-4">
+                    <Users size={18} className="text-[#c9a84c]" />
+                  </div>
+                  <div className="text-4xl font-black text-white mb-1">{session.price}</div>
+                  <div className="text-[#c9a84c] text-xs font-bold uppercase tracking-widest mb-2">
+                    {session.duration}
+                  </div>
+                  <p className="text-gray-400 text-sm">
+                    {session.people} {session.people === 1 ? "person" : "people"}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </Animate>
+
+          <Animate className="text-center mt-8">
+            <motion.div variants={fadeUp}>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 border border-white/20 hover:border-[#c9a84c] text-gray-300 hover:text-white text-sm font-bold uppercase tracking-widest px-8 py-3.5 transition-colors"
+              >
+                Book Private Session <ChevronRight size={14} />
+              </Link>
+            </motion.div>
           </Animate>
         </div>
       </section>
 
-      {/* Free trial CTA */}
       <section className="relative py-20 bg-[#cc0000] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_100%_50%,rgba(0,0,0,0.3),transparent)]" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -205,18 +185,17 @@ export default function MembershipPage() {
               Not Sure Yet?
             </motion.h2>
             <motion.p variants={fadeUp} className="text-red-100 text-lg mb-8 max-w-lg mx-auto">
-              Book a completely free trial class. No commitment, no pressure. Come in and see if we&apos;re the right fit for you.
+              Try a single class for £10, or get in touch to arrange your first visit.
             </motion.p>
             <motion.div variants={fadeUp}>
               <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#cc0000] font-black uppercase tracking-widest text-sm px-10 py-4 hover:bg-gray-100 transition-colors">
-                Book Free Trial
+                Get in Touch
               </Link>
             </motion.div>
           </Animate>
         </div>
       </section>
 
-      {/* FAQ */}
       <section className="py-24 bg-[#0a0a0a]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <Animate className="text-center mb-14">
@@ -231,11 +210,7 @@ export default function MembershipPage() {
           <Animate>
             <div className="space-y-4">
               {faqs.map((faq) => (
-                <motion.div
-                  key={faq.q}
-                  variants={fadeUp}
-                  className="bg-[#111] border border-white/5 p-6"
-                >
+                <motion.div key={faq.q} variants={fadeUp} className="bg-[#111] border border-white/5 p-6">
                   <div className="flex items-start gap-3 mb-2">
                     <HelpCircle size={16} className="text-[#c9a84c] mt-0.5 shrink-0" />
                     <h3 className="text-white font-bold">{faq.q}</h3>

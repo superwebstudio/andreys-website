@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Trophy, Star } from "lucide-react";
+import { headTrainer } from "@/lib/gym-data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -23,18 +24,13 @@ function Animate({ children, className = "" }: { children: React.ReactNode; clas
 
 const coaches = [
   {
-    name: "Marcus 'The Predator' Hill",
-    role: "Head Coach",
-    discipline: "MMA · Muay Thai · Wrestling",
-    initials: "MH",
+    name: headTrainer.name,
+    role: headTrainer.role,
+    discipline: headTrainer.discipline,
+    initials: headTrainer.initials,
     color: "from-[#cc0000]/20 to-[#1a0000]",
-    bio: "Marcus founded Predators MMA after a 9-year career as a professional MMA fighter. With wins across three continents and a depth of technical knowledge matched by few, he now channels every bit of that experience into coaching the next generation.",
-    achievements: [
-      "Professional MMA record: 18–4",
-      "BAMMA Welterweight Champion 2014",
-      "12+ years head coaching experience",
-      "Produced 3 national champions",
-    ],
+    bio: headTrainer.bio[0] + " " + headTrainer.bio[1],
+    achievements: headTrainer.achievements,
   },
   {
     name: "Sofia Reyes",
@@ -191,7 +187,7 @@ export default function CoachesPage() {
               Want to Compete?
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-400 text-lg mb-8 max-w-xl mx-auto">
-              Our fighter programme is for members serious about competing. Speak to Marcus or Sofia about entering the programme.
+              Our fighter programme is for members serious about competing. Speak to {headTrainer.name} about entering the programme.
             </motion.p>
             <motion.div variants={fadeUp}>
               <a href="/contact" className="inline-flex items-center gap-2 bg-[#cc0000] hover:bg-[#990000] text-white font-bold uppercase tracking-widest text-sm px-8 py-4 transition-colors">

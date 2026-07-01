@@ -3,8 +3,10 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Shield, Flame, Users, Target, ChevronRight, Trophy } from "lucide-react";
 import { headTrainer } from "@/lib/gym-data";
+import { aboutImages } from "@/lib/site-images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -77,14 +79,14 @@ export default function AboutPage() {
           {/* Image block */}
           <Animate>
             <motion.div variants={fadeUp} className="relative aspect-[3/4] bg-[#1a1a1a] overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-[#cc0000]/20 text-[8rem] font-black leading-none">15+</div>
-                  <p className="text-gray-600 text-xs">Years of excellence</p>
-                </div>
-              </div>
+              <Image
+                src={aboutImages.gym}
+                alt="Predators MMA team in the gym"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
               <div className="absolute inset-0 border border-[#cc0000]/10" />
-              <p className="absolute bottom-4 left-4 text-gray-600 text-xs">Add gym interior photo</p>
             </motion.div>
           </Animate>
 
@@ -118,10 +120,16 @@ export default function AboutPage() {
       <section className="py-24 bg-[#0a0a0a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
           <Animate>
-            <motion.div variants={fadeUp} className="relative aspect-[4/5] bg-[#1a1a1a] overflow-hidden flex items-center justify-center">
-              <span className="text-8xl font-black text-[#cc0000]/15 select-none">{headTrainer.initials}</span>
+            <motion.div variants={fadeUp} className="relative aspect-[4/5] bg-[#1a1a1a] overflow-hidden">
+              <Image
+                src={aboutImages.coachMain}
+                alt={`Coach ${headTrainer.name}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
               <div className="absolute inset-0 border border-[#cc0000]/10" />
-              <p className="absolute bottom-4 left-4 text-gray-600 text-xs">Add coach photo</p>
             </motion.div>
           </Animate>
 
@@ -156,6 +164,24 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
+            </motion.div>
+          </Animate>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+          <Animate>
+            <motion.div variants={fadeUp} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {aboutImages.coachGallery.map((photo, index) => (
+                <div key={index} className="relative aspect-[4/3] overflow-hidden border border-white/5">
+                  <Image
+                    src={photo}
+                    alt={`Coach ${headTrainer.name} with fighters ${index + 1}`}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
             </motion.div>
           </Animate>
         </div>

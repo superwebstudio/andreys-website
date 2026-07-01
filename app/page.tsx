@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ChevronRight,
   Clock,
@@ -13,6 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { membershipPlans, schedule } from "@/lib/gym-data";
+import { aboutImages } from "@/lib/site-images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -203,13 +205,13 @@ export default function HomePage() {
             {/* Image placeholder */}
             <Section className="relative">
               <motion.div variants={fadeUp} className="relative aspect-[4/5] bg-[#1a1a1a] overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-[#cc0000] text-6xl font-black opacity-20">PMMA</div>
-                    <p className="text-gray-600 text-xs mt-2">Add your gym photo here</p>
-                  </div>
-                </div>
-                {/* Decorative border */}
+                <Image
+                  src={aboutImages.gym}
+                  alt="Predators MMA team in the gym"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
                 <div className="absolute top-4 left-4 right-4 bottom-4 border border-[#cc0000]/20 pointer-events-none" />
               </motion.div>
               {/* Gold accent block */}

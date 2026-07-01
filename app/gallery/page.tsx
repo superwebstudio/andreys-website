@@ -2,7 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { galleryCategories, galleryPhotos } from "@/lib/site-images";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -21,42 +23,15 @@ function Animate({ children, className = "" }: { children: React.ReactNode; clas
   );
 }
 
-const categories = ["All", "Training", "Fighters", "Events", "Gym"];
-
-const photos = [
-  { id: 1, category: "Training", label: "Morning Boxing Session", aspect: "aspect-square" },
-  { id: 2, category: "Fighters", label: "Competition Day", aspect: "aspect-[3/4]" },
-  { id: 3, category: "Gym", label: "Main Training Area", aspect: "aspect-square" },
-  { id: 4, category: "Events", label: "Predators Fight Night", aspect: "aspect-[4/3]" },
-  { id: 5, category: "Training", label: "BJJ Drilling", aspect: "aspect-square" },
-  { id: 6, category: "Fighters", label: "Title Bout — Marcus Hill", aspect: "aspect-[3/4]" },
-  { id: 7, category: "Training", label: "Muay Thai Pads", aspect: "aspect-square" },
-  { id: 8, category: "Gym", label: "Weights & Conditioning Floor", aspect: "aspect-[4/3]" },
-  { id: 9, category: "Events", label: "End of Year Showcase", aspect: "aspect-square" },
-  { id: 10, category: "Training", label: "Kids Kickboxing Class", aspect: "aspect-[3/4]" },
-  { id: 11, category: "Fighters", label: "Sofia Reyes — BJJ Championship", aspect: "aspect-square" },
-  { id: 12, category: "Gym", label: "Changing & Locker Rooms", aspect: "aspect-[4/3]" },
-  { id: 13, category: "Training", label: "Evening MMA Sparring", aspect: "aspect-square" },
-  { id: 14, category: "Events", label: "Predators Open Day 2024", aspect: "aspect-[3/4]" },
-  { id: 15, category: "Fighters", label: "Danny Okafor — Amateur Finals", aspect: "aspect-square" },
-];
-
-const colorBlocks = [
-  "bg-[#1a0000]",
-  "bg-[#110000]",
-  "bg-[#1a1500]",
-  "bg-[#0d0d1a]",
-  "bg-[#0d1a0d]",
-  "bg-[#1a0d00]",
-];
+const categories = [...galleryCategories];
 
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const filtered = activeCategory === "All"
-    ? photos
-    : photos.filter((p) => p.category === activeCategory);
+    ? galleryPhotos
+    : galleryPhotos.filter((p) => p.category === activeCategory);
 
   const handlePrev = () => {
     if (lightbox === null) return;
@@ -115,25 +90,26 @@ export default function GalleryPage() {
           {/* Photo grid */}
           <Animate key={activeCategory}>
             <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
-              {filtered.map((photo, i) => (
+              {filtered.map((photo) => (
                 <motion.div
                   key={photo.id}
                   variants={fadeUp}
                   onClick={() => setLightbox(photo.id)}
-                  className={`break-inside-avoid ${photo.aspect} ${colorBlocks[i % colorBlocks.length]} relative overflow-hidden cursor-pointer group border border-white/5 hover:border-[#cc0000]/30 transition-colors`}
+                  className={`break-inside-avoid ${photo.aspect} relative overflow-hidden cursor-pointer group border border-white/5 hover:border-[#cc0000]/30 transition-colors`}
                 >
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                    <span className="text-2xl font-black text-white/10">{photo.id}</span>
-                  </div>
-                  {/* Hover overlay */}
+                  <Image
+                    src={photo.src}
+                    alt={photo.label}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover"
+                  />
                   <div className="absolute inset-0 bg-[#cc0000]/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <div>
                       <div className="text-[10px] text-red-200 uppercase tracking-widest font-bold mb-1">{photo.category}</div>
                       <p className="text-white text-sm font-bold">{photo.label}</p>
                     </div>
                   </div>
-                  {/* Placeholder text */}
-                  <p className="absolute top-2 right-2 text-[9px] text-gray-700">Add photo</p>
                 </motion.div>
               ))}
             </div>
@@ -161,14 +137,19 @@ export default function GalleryPage() {
           </button>
 
           <div
-            className="max-w-2xl w-full bg-[#1a1a1a] aspect-[4/3] flex items-center justify-center"
+            className="relative max-w-4xl w-full aspect-[4/3] bg-[#1a1a1a] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-center">
-              <div className="text-[#cc0000]/20 text-8xl font-black">{lightboxPhoto.id}</div>
-              <div className="text-[#c9a84c] text-xs uppercase tracking-widest mt-2">{lightboxPhoto.category}</div>
+            <Image
+              src={lightboxPhoto.src}
+              alt={lightboxPhoto.label}
+              fill
+              sizes="(max-width: 1024px) 100vw, 896px"
+              className="object-contain"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <div className="text-[#c9a84c] text-xs uppercase tracking-widest">{lightboxPhoto.category}</div>
               <p className="text-white font-bold mt-1">{lightboxPhoto.label}</p>
-              <p className="text-gray-600 text-xs mt-2">Add photo here</p>
             </div>
           </div>
         </motion.div>
